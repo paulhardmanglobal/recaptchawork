@@ -1,5 +1,6 @@
 // app/api/items/route.ts
 import { NextResponse } from "next/server";
+const secretToken = process.env.RECAPTCHA_SECRET_KEY as string;
 
 // GET handler
 export async function GET() {
@@ -43,16 +44,12 @@ export async function POST(request: Request) {
 async function getGoogleRes(token: string): Promise<unknown> {
   try {
     const response = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
+      `https://www.google.com/recaptcha/api/siteverify?secret=${secretToken}&response=${token}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          secret: "6LdcQ3AqAAAAAPkwFBNaA66ikupYk5g2yA3PgGFO",
-          response: token,
-        }),
       }
     );
 
