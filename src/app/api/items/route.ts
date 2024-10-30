@@ -31,7 +31,10 @@ export async function POST(request: Request) {
 
     console.log(googleRes);
 
-    return NextResponse.json({ item: body.token }, { status: 201 });
+    return NextResponse.json(
+      { item: body.token, googleResponse: googleRes },
+      { status: 201 }
+    );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error: unknown) {
     return NextResponse.json(
