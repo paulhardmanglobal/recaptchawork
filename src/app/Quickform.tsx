@@ -10,7 +10,7 @@ export function QuickForm() {
     message: "",
   });
 
-  const handleChange = (e: { target: { name: unknown; value: unknown } }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -18,7 +18,7 @@ export function QuickForm() {
     }));
   };
 
-  const handleSubmit = async (e: unknown) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (!executeRecaptcha) {
       // It takes a small amount of time for the script to be available and connect etc so it could in theory be undefined
       console.error("no recaptcha yet");
